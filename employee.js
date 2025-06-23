@@ -7,59 +7,45 @@ class employee {
         this.empId = empId;
         this.empName = empName;
 
-        // Randomly determine attendance statuses
-        this.empAttendance = this.checkAttendance();        // Full-time
-        this.partTimeAttendance = this.checkAttendance();   // Part-time
+       this.totalWage=this.calculateMonthlyWage()
     }
 
     // Randomly return one of the three attendance types
     checkAttendance() {
-        const attendanceType = ["Absent", "Present", "Part-time"];
-        return attendanceType[Math.floor(Math.random() * 2)];
+      
+        return Math.floor(Math.random() * 3);
     }
 
-    //! UC4 - Switch Case Calculation
-    calculateMonthlyWage() {
-        const WAGE_PER_HOUR = 20;
+    //!UC5_Monthly_Wage
+
+    getDailyHour()
+    {
         const FULL_DAY_HOUR = 8;
         const PART_TIME_HOUR = 4;
-
-
-        let fullTimeWage = 0;
-        let partTimeWage = 0;
-
-        // Full-time wage calculation
-        switch (this.empAttendance) {
-            case "Absent":
-                fullTimeWage = 0;
-                break;
-            case "Present":
-                fullTimeWage = WAGE_PER_HOUR * FULL_DAY_HOUR;
-                break;
-            case "Part-time":
-                fullTimeWage = WAGE_PER_HOUR * PART_TIME_HOUR;
-                break;
+        let dailyHour=this.checkAttendance()
+        switch(dailyHour)
+        {
+            case 1:return 8;break;
+            case 2:return 4;break;
+            default :return 0;break
         }
-
-        // Part-time wage calculation
-        switch (this.partTimeAttendance) {
-            case "Absent":
-                partTimeWage = 0;
-                break;
-            case "Present":
-                partTimeWage = WAGE_PER_HOUR * PART_TIME_HOUR;
-                break;
-            case "Part-time":
-                partTimeWage = WAGE_PER_HOUR * PART_TIME_HOUR;
-                break;
-        }
-        
-        return  fullTimeWage + partTimeWage;
+    }
+    calculateMonthlyWage() {
+        const WAGE_PER_HOUR = 20;
+        let totalWage=0;
+       
+       for(let days=1;days<=20;days++)
+       {
+        let hours=this.getDailyHour()
+        totalWage+=hours*WAGE_PER_HOUR
+       }
+                
+        return  totalWage
     }
 
     // Display method with proper format
     displayDetails() {
-        console.log(`Employee ID: ${this.empId} and Employee name: ${this.empName} was ${this.empAttendance.toLowerCase()} for full time, and ${this.partTimeAttendance.toLowerCase()} for part time and employee earned ${this.calculateMonthlyWage()}`);
+        console.log(`Employee ID: ${this.empId} and Employee name: ${this.empName} and earned RS.${this.calculateMonthlyWage()} for 20 days`);
     }
 }
 
