@@ -18,11 +18,23 @@ class employee {
         return Math.floor(Math.random() * 2) ? "Absent" : "Present";
     }
 
+
+    //! UC2-CalculateDailyWage
+
+    calculateMonthlyWage()
+    {
+        const WAGE_PER_HOUR=20
+        const FULL_DAY_HOUR=8
+        return this.empAttendance==="Present"?WAGE_PER_HOUR*FULL_DAY_HOUR:0;
+    }
+
+   
     // Method to display employee details
     displayDetails() {
-        console.log(`Employee ID : ${this.empId} and Employee name : ${this.empName} is ${this.empAttendance}`);
+        console.log(`Employee ID : ${this.empId} and Employee name : ${this.empName} was  ${this.empAttendance} and employee earned ${this.calculateMonthlyWage()}`);
     }
 }
+
 
 // Create an instance of employee
 let emp1 = new employee(1455, "Tom");
