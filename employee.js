@@ -26,7 +26,7 @@ class employee {
 
     //! UC3 - Calculate wage based on attendance
 
-    calculateMonthlyWage() {
+    calculateDailyWage() {
         const WAGE_PER_HOUR = 20;       // Hourly wage rate
         const FULL_DAY_HOUR = 8;        // Working hours for full-time
         const PART_TIME_HOUR = 4;       // Working hours for part-time
