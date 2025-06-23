@@ -1,61 +1,72 @@
 // Display a welcome message on the console
 console.log("Welcome to employee wage computation");
 
-// ! UC1 - Check Attendance
-
 // Define a class named 'employee'
 class employee {
-
-    // Constructor to initialize employee details
     constructor(empId, empName) {
-        this.empId = empId;                      // Assign employee ID
-        this.empName = empName;                  // Assign employee name
+        this.empId = empId;
+        this.empName = empName;
 
-        // Randomly determine full-time attendance status
-        this.empAttendance = this.checkAttendance();
-
-        // Randomly determine part-time attendance status (separately from full-time)
-        this.partTimeAttendance = this.checkAttendance();
+        // Randomly determine attendance statuses
+        this.empAttendance = this.checkAttendance();        // Full-time
+        this.partTimeAttendance = this.checkAttendance();   // Part-time
     }
 
-    // Method to randomly return "Present" or "Absent"
+    // Randomly return one of the three attendance types
     checkAttendance() {
-        // Math.random() gives 0 to 2 → If 1, return "Absent", else "Present"
-        return Math.floor(Math.random() * 3) === 1 ? "Absent" : "Present";
+        const attendanceType = ["Absent", "Present", "Part-time"];
+        return attendanceType[Math.floor(Math.random() * 2)];
     }
 
-    //! UC3 - Calculate wage based on attendance
+    //! UC4 - Switch Case Calculation
+    calculateMonthlyWage() {
+        const WAGE_PER_HOUR = 20;
+        const FULL_DAY_HOUR = 8;
+        const PART_TIME_HOUR = 4;
 
-    calculateDailyWage() {
-        const WAGE_PER_HOUR = 20;       // Hourly wage rate
-        const FULL_DAY_HOUR = 8;        // Working hours for full-time
-        const PART_TIME_HOUR = 4;       // Working hours for part-time
 
-        let dailyWage = 0;              // Wage for full-time attendance
-        let partTimeWage = 0;           // Wage for part-time attendance
+        let fullTimeWage = 0;
+        let partTimeWage = 0;
 
-        // Calculate full-time wage if employee is present
-        if (this.empAttendance === "Present") {
-            dailyWage = WAGE_PER_HOUR * FULL_DAY_HOUR;
+        // Full-time wage calculation
+        switch (this.empAttendance) {
+            case "Absent":
+                fullTimeWage = 0;
+                break;
+            case "Present":
+                fullTimeWage = WAGE_PER_HOUR * FULL_DAY_HOUR;
+                break;
+            case "Part-time":
+                fullTimeWage = WAGE_PER_HOUR * PART_TIME_HOUR;
+                break;
         }
 
-        // Calculate part-time wage if employee is present
-        if (this.partTimeAttendance === "Present") {
-            partTimeWage = WAGE_PER_HOUR * PART_TIME_HOUR;
+        // Part-time wage calculation
+        switch (this.partTimeAttendance) {
+            case "Absent":
+                partTimeWage = 0;
+                break;
+            case "Present":
+                partTimeWage = WAGE_PER_HOUR * PART_TIME_HOUR;
+                break;
+            case "Part-time":
+                partTimeWage = WAGE_PER_HOUR * PART_TIME_HOUR;
+                break;
         }
-
-        // Return total wage (full-time + part-time)
-        return dailyWage + partTimeWage;
+        
+        return  fullTimeWage + partTimeWage;
     }
 
-    // Method to display employee attendance and total wage
+    // Display method with proper format
     displayDetails() {
-        console.log(`Employee ID : ${this.empId} and Employee name : ${this.empName} was ${this.empAttendance} for full time, and ${this.partTimeAttendance} for part time and employee earned ${this.calculateMonthlyWage()}`);
+        console.log(`Employee ID: ${this.empId} and Employee name: ${this.empName} was ${this.empAttendance.toLowerCase()} for full time, and ${this.partTimeAttendance.toLowerCase()} for part time and employee earned ${this.calculateMonthlyWage()}`);
     }
 }
 
-// Create an instance of employee with ID and Name
-let emp1 = new employee(1455, "Tom");
+// Create and test an employee instance
+let employees =[ new employee(1455, "Vinay"),new employee(1456,"Yogeesh"),new employee(1457,"Pavan")];
 
-// Call the method to display employee attendance and wage
-emp1.displayDetails();
+for(let employee of employees)
+{
+    employee.displayDetails()
+}
