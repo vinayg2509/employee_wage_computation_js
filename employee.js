@@ -1,29 +1,31 @@
 console.log("Welcome to employee wage computation");
 
+// ! UC1 - Check Attendance
 
-// ! UC1-CheckAttendance
+// Define a class named 'employee'
+class employee {
 
-class employee{
-
-    constructor(empId,empName)
-    {
-        this.empId=empId
-        this.empName=empName
-        this.empAttendance=this.checkAttendance()
+    // Constructor to initialize employee details
+    constructor(empId, empName) {
+        this.empId = empId;                      // Assign employee ID
+        this.empName = empName;                  // Assign employee name
+        this.empAttendance = this.checkAttendance(); // Determine and store attendance
     }
 
-
-    checkAttendance()
-    {
-        return Math.floor(Math.random()*2)?"Absent":"Present"
+    // Method to randomly check attendance
+    checkAttendance() {
+        // Returns "Absent" if random number is 1, otherwise "Present"
+        return Math.floor(Math.random() * 2) ? "Absent" : "Present";
     }
 
-    displayDetails()
-    {
-        console.log(`Employee ID :${this.empId} and Employee name :${this.empName} is ${this.empAttendance}`);
-        
+    // Method to display employee details
+    displayDetails() {
+        console.log(`Employee ID : ${this.empId} and Employee name : ${this.empName} is ${this.empAttendance}`);
     }
 }
 
-let emp1=new employee(1455,"Tom")
-emp1.displayDetails()
+// Create an instance of employee
+let emp1 = new employee(1455, "Tom");
+
+// Call the method to display employee information
+emp1.displayDetails();
