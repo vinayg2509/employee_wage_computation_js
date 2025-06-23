@@ -24,6 +24,7 @@ class employee {
         const FULL_DAY_HOUR = 8;
         const PART_TIME_HOUR = 4;
 
+
         let fullTimeWage = 0;
         let partTimeWage = 0;
 
